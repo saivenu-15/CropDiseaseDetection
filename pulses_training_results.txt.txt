@@ -1,0 +1,116 @@
+==========================================
+PULSES DISEASE CLASSIFICATION - TRAINING RESULTS
+==========================================
+
+MODEL: ImprovedCNN (9 classes)
+DEVICE: CPU
+BATCH SIZE: 8
+EPOCHS: 25
+LEARNING RATE: 0.0005
+
+==========================================
+CLASSES (9 Total):
+==========================================
+1. anthracnose
+2. DOWNY_MILDEW_LEAF
+3. FRESH_LEAF
+4. healthy
+5. leaf crinckle
+6. LEAFMINNER_LEAF
+7. POWDER_MILDEW_LEAF
+8. powdery mildew
+9. yellow mosaic
+
+==========================================
+TRAINING DETAILS:
+==========================================
+Total Training Samples: 270 images
+Total Validation Samples: 54 images
+Class Balance: 30 images per class (train), 6 per class (val)
+
+==========================================
+EPOCH-BY-EPOCH RESULTS:
+==========================================
+Epoch  1: Train Acc: 26.30% | Val Acc: 18.52% [SAVED BEST]
+Epoch  2: Train Acc: 39.26% | Val Acc: 33.33% [SAVED BEST]
+Epoch  3: Train Acc: 40.00% | Val Acc: 51.85% [SAVED BEST]
+Epoch  4: Train Acc: 44.44% | Val Acc: 55.56% [SAVED BEST]
+Epoch  5: Train Acc: 45.56% | Val Acc: 50.00%
+Epoch  6: Train Acc: 48.52% | Val Acc: 48.15%
+Epoch  7: Train Acc: 44.07% | Val Acc: 42.59%
+Epoch  8: Train Acc: 51.48% | Val Acc: 44.44%
+Epoch  9: Train Acc: 50.37% | Val Acc: 29.63%
+Epoch 10: Train Acc: 51.48% | Val Acc: 44.44%
+Epoch 11: Train Acc: 51.85% | Val Acc: 53.70%
+Epoch 12: Train Acc: 55.56% | Val Acc: 25.93%
+Epoch 13: Train Acc: 49.63% | Val Acc: 53.70%
+Epoch 14: Train Acc: 54.44% | Val Acc: 59.26% [SAVED BEST]
+Epoch 15: Train Acc: 57.41% | Val Acc: 59.26%
+Epoch 16: Train Acc: 56.30% | Val Acc: 37.04%
+Epoch 17: Train Acc: 57.78% | Val Acc: 50.00%
+Epoch 18: Train Acc: 58.52% | Val Acc: 46.30%
+Epoch 19: Train Acc: 58.15% | Val Acc: 35.19%
+Epoch 20: Train Acc: 59.63% | Val Acc: 59.26%
+Epoch 21: Train Acc: 61.48% | Val Acc: 53.70%
+Epoch 22: Train Acc: 61.11% | Val Acc: 44.44%
+Epoch 23: Train Acc: 60.00% | Val Acc: 53.70%
+Epoch 24: Train Acc: 64.44% | Val Acc: 46.30%
+Epoch 25: Train Acc: (final epoch)
+
+==========================================
+FINAL RESULTS:
+==========================================
+Best Validation Accuracy: 59.26%
+Best Epoch: 14 and 15 and 20
+Final Training Accuracy: 64.44% (Epoch 24)
+
+==========================================
+MODEL CHECKPOINT:
+==========================================
+File: pulses_model_improved.pth
+Location: c:\Users\venu\Desktop\AI_Crop_Disease\models\pulses_model_improved.pth
+Contains: Model state_dict and classes
+
+==========================================
+DATA AUGMENTATION USED:
+==========================================
+- RandomResizedCrop (128x128, scale 0.7-1.0)
+- RandomHorizontalFlip (0.5 probability)
+- RandomRotation (20 degrees)
+- ColorJitter (brightness, contrast, saturation: 0.3)
+- Normalization (ImageNet mean/std)
+
+==========================================
+IMPROVEMENTS ACHIEVED:
+==========================================
+Initial Accuracy (baseline): 25.93%
+Final Accuracy: 59.26%
+Improvement: +33.33 percentage points
+
+==========================================
+NOTES:
+==========================================
+- Training completed successfully
+- Model saved at best validation accuracy
+- No test set evaluation yet
+- Ready for inference on new pulses images
+- Total training time: ~2.5 minutes
+
+==========================================
+
+// trained model out put with image combained accuracy
+
+🚀 Pulses Model Loaded Successfully!
+
+📸 Predicting for: 37y.jpg
+
+===============================
+🔮 Predicted Class: yellow mosaic
+===============================
+
+🧪 Calculating Pulses Model Test Accuracy...
+
+===============================================
+✅ Pulses Model Test Accuracy: 55.56%
+📌 Correct Predictions: 30/54
+===============================================

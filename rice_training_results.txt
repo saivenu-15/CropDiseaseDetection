@@ -1,0 +1,121 @@
+🌾 Rice Classes:
+ - Bacterial Leaf Blight
+ - Brown Spot
+ - Healthy Rice Leaf
+ - Leaf Blast
+ - Leaf scald
+ - Sheath Blight
+
+🚀 Starting Improved RICE Training...
+
+
+🔥 Epoch 1/25
+Train Acc: 23.89% | Val Acc: 33.33%
+✅ Saved best rice model!
+
+🔥 Epoch 2/25
+Train Acc: 44.44% | Val Acc: 27.78%
+
+🔥 Epoch 3/25
+Train Acc: 40.00% | Val Acc: 47.22%
+✅ Saved best rice model!
+
+🔥 Epoch 4/25
+Train Acc: 52.22% | Val Acc: 52.78%
+✅ Saved best rice model!
+
+🔥 Epoch 5/25
+Train Acc: 42.78% | Val Acc: 52.78%
+
+🔥 Epoch 6/25
+Train Acc: 48.33% | Val Acc: 55.56%
+✅ Saved best rice model!
+
+🔥 Epoch 7/25
+Train Acc: 55.00% | Val Acc: 58.33%
+✅ Saved best rice model!
+
+🔥 Epoch 8/25
+Train Acc: 56.67% | Val Acc: 66.67%
+✅ Saved best rice model!
+
+🔥 Epoch 9/25
+Train Acc: 55.56% | Val Acc: 61.11%
+
+🔥 Epoch 10/25
+Train Acc: 58.89% | Val Acc: 63.89%
+
+🔥 Epoch 11/25
+Train Acc: 58.89% | Val Acc: 61.11%
+
+🔥 Epoch 12/25
+Train Acc: 60.56% | Val Acc: 58.33%
+
+🔥 Epoch 13/25
+Train Acc: 58.89% | Val Acc: 63.89%
+
+🔥 Epoch 14/25
+Train Acc: 58.33% | Val Acc: 61.11%
+
+🔥 Epoch 15/25
+Train Acc: 66.67% | Val Acc: 61.11%
+
+🔥 Epoch 16/25
+Train Acc: 56.11% | Val Acc: 63.89%
+
+🔥 Epoch 17/25
+Train Acc: 60.00% | Val Acc: 52.78%
+
+🔥 Epoch 18/25
+Train Acc: 65.00% | Val Acc: 55.56%
+
+🔥 Epoch 19/25
+Train Acc: 63.89% | Val Acc: 63.89%
+
+🔥 Epoch 20/25
+Train Acc: 66.67% | Val Acc: 58.33%
+
+🔥 Epoch 21/25
+Train Acc: 67.22% | Val Acc: 58.33%
+
+🔥 Epoch 22/25
+Train Acc: 67.22% | Val Acc: 66.67%
+
+🔥 Epoch 23/25
+Train Acc: 68.33% | Val Acc: 69.44%
+✅ Saved best rice model!
+
+🔥 Epoch 24/25
+Train Acc: 68.33% | Val Acc: 61.11%
+
+🔥 Epoch 25/25
+Train Acc: 68.89% | Val Acc: 61.11%
+
+🎉 Training Complete!
+Best Validation Accuracy: 69.44444444444444
+
+
+
+RICE MODEL TRAINING RESULTS
+=================================
+Best Validation Accuracy: 66.67%
+Final Training Accuracy: 64.44%
+
+Model saved as: rice_model_improved.pth
+
+//*** test result of the image and its Accuracy ****//
+
+Model Loaded Successfully!
+
+Predicting for image: aug_0_1254.jpg
+
+===============================
+Predicted Class: Bacterial Leaf Blight
+===============================
+
+Calculating Test Accuracy...
+
+===========================================
+Test Accuracy: 52.78%
+Correct Predictions: 19/36
+===========================================
