@@ -1,6 +1,4 @@
- # AI-Driven-Web-Application-for-Automated-Disease-Detection-in-Rice-and-Pulse-Crops_Nov_Batch-6_2025
- 
- 🌾 **AI-Driven Crop Disease Detection (Rice & Pulses)**
+  **AI-Driven Crop Disease Detection (Rice & Pulses)**
 
 ### *Milestone-1 – Model Training & Evaluation*
 
@@ -9,12 +7,12 @@
 
 ---
 
-## 📌 **Project Overview**
+##  **Project Overview**
 
 This project aims to develop an **AI-powered disease detection system** for:
 
 * **Rice crops**
-* **Pulse crops (BPLD + Pea Plant)**
+* **Pulse crops**
 
 The goal is to automate leaf disease diagnosis using **Deep Learning models** trained on curated datasets of plant leaf images.
 
@@ -28,151 +26,158 @@ This repository contains all deliverables for **Milestone-1**, including:
 
 ---
 
-## 📁 **Repository Structure**
+##  **Repository Structure**
 
 ```
-AI_Crop_Disease/
+
+
+```
+AI-Driven-Web-Application-for-Automated-Disease-Detection-in-Rice-and-Pulse-Crops/
 │
-├── dataset_split/                 # Final cleaned & reduced dataset used for training
+├── dataset_split/                     # Final cleaned & reduced dataset used for training
 │   ├── RICE/
 │   └── PULSES/
 │
-├── 2 split codes/                 # Scripts for dataset split & reduction
+├── split_codes/                       # Scripts for dataset splitting & reduction
 │   ├── split_dataset.py
 │   ├── reduce_rice_dataset.py
 │   ├── reduce_pulses_dataset.py
 │   └── dataset_loader.py
 │
-├── train_rice_model.py            # Final Rice model training script
-├── train_pulses_model.py          # Final Pulses model training script
+├── training_scripts/                  # Model training scripts
+│   ├── train_rice_model.py
+│   └── train_pulses_model.py
 │
-├── rice_model.pth                 # Saved Rice model (best validation accuracy)
-├── pulses_model.pth               # Saved Pulses model
+├── results/                           # Training & testing result reports
+│   ├── rice_training_results.txt
+│   └── pulses_training_results.txt
 │
-├── rice_training_results.txt      # Rice accuracy report
-├── pulses_training_results.txt    # Pulses accuracy report
+├── streamlit_app/                     # Streamlit web application
+│   ├── app.py                         # Streamlit UI and navigation
+│   ├── auth.py                        # Authentication and SQLite DB handling
+│   ├── model_predict.py               # ML prediction logic (SOLID + OOPS)
+│   ├── requirements.txt               # Python dependencies
+│   ├── models/                        # Trained ML models
+│   │   ├── rice_model_improved.pth
+│   │   └── pulses_model_improved.pth
+│   └── db/
+│       └── users.db                   # SQLite database
 │
-└── README.md                      # Project documentation
+└── README.md                          # Project documentation
+
+
 ```
+##  SOLID Principles Implementation in This Project
+
+This project follows **SOLID principles** using **Object-Oriented Programming (OOPS)** concepts to ensure scalability, maintainability, and clean architecture.
 
 ---
 
-## 🧠 **Model Architecture**
+### 1️ Single Responsibility Principle (SRP)
 
-Two separate CNN models were trained:
+> *Each module has only one responsibility.*
 
-### **1️⃣ Rice Model**
+**Implementation in the project:**
 
-* Custom Improved CNN
-* Strong augmentation
-* Lightweight architecture (CPU-friendly)
-* Trained on reduced dataset (30–40 images/class)
+* `app.py`
 
-### **2️⃣ Pulses Model**
+  * Handles **Streamlit UI**, navigation, and user interaction only.
+* `auth.py`
 
-* Custom CNN optimized for small datasets
-* Handles multiple leaf disease classes from BPLD + Pea Plant
-* Heavy augmentation to improve generalization
+  * Handles **user authentication**, login, registration, and SQLite database operations.
+* `model_predict.py`
 
----
+  * Handles **model loading and prediction logic** only.
+* `training_scripts/`
 
-## 📊 **Training & Validation Results**
+  * Contains scripts used **only for training models**.
+* `dataset_split/`
 
-Both models save their results into text files:
+  * Contains datasets used **only for training and evaluation**.
 
-### 📄 Rice:
-
-```
-rice_training_results.txt
-```
-
-### 📄 Pulses:
-
-```
-pulses_training_results.txt
-```
-
-These contain:
-
-* Best Validation Accuracy
-* Final Training Accuracy
-* Model file saved
+ This separation ensures that changes in one module do not affect others.
 
 ---
 
-## ▶️ **How to Run Training Scripts**
+### 2️ Open / Closed Principle (OCP)
 
-### **Train Rice Model**
+> *Software entities should be open for extension but closed for modification.*
 
-```
-py -3.10 train_rice_model.py
-```
+**Implementation in the project:**
 
-### **Train Pulses Model**
+* A **base abstract class** is used for prediction logic.
+* New crop disease models (e.g., Wheat, Tomato) can be added by **creating new subclasses**.
+* Existing UI and prediction flow do **not need to be modified**.
 
-```
-py -3.10 train_pulses_model.py
-```
-
-Both scripts automatically:
-
-* Load dataset
-* Train for 25 epochs
-* Save best .pth model
-* Generate .txt summary of results
+ This allows easy extension of the system without rewriting existing code.
 
 ---
 
-## 🧪 **Evaluation**
+### 3️ Liskov Substitution Principle (LSP)
 
-A separate evaluation script (optional for Milestone-1) can compute:
+> *Derived classes must be substitutable for their base classes.*
 
-* Test accuracy
-* Per-class metrics
-* Confusion matrix
+**Implementation in the project:**
 
-*(If needed, GPT can generate this script.)*
+* `RiceDiseaseModel` and `PulsesDiseaseModel` inherit from a common abstract base class.
+* Both models implement the same `predict()` interface.
+* Either model can be used interchangeably without breaking the application.
 
----
-
-## 🚀 **Milestone-1 Deliverables Completed**
-
-| Task                                           | Status                |
-| ---------------------------------------------- | --------------------- |
-| Dataset cleaning and reduction                 | ✅ Done                |
-| Train/Val/Test split                           | ✅ Done                |
-| Rice model training                            | ✅ Completed           |
-| Pulses model training                          | ✅ Completed           |
-| Accuracy reports (.txt)                        | ✅ Generated           |
-| Model files (.pth)                             | ✅ Saved               |
-| Code uploaded to GitHub (branch: **sai-venu**) | ⏳ Pending (next step) |
-| Results uploaded to Google Drive               | ⏳ Pending             |
+ This ensures consistent behavior across different crop models.
 
 ---
 
-## 🧾 **Branch Information**
+### 4️ Interface Segregation Principle (ISP)
 
-As instructed by the mentor:
+> *Clients should not be forced to depend on interfaces they do not use.*
 
-```
-Branch Name: sai-venu
-```
+**Implementation in the project:**
 
-All Milestone-1 files must be pushed to this branch.
+* The Streamlit UI (`app.py`) interacts with:
+
+  * `verify_user()` and `add_user()` from `auth.py`
+  * `predict()` from `model_predict.py`
+* UI does **not depend on**:
+
+  * Database query logic
+  * PyTorch model internals
+  * CNN architecture details
+
+ Each module exposes only the necessary interfaces.
 
 ---
 
-## ✨ **Future Enhancements (Milestone-2 & 3)**
+### 5️ Dependency Inversion Principle (DIP)
 
-* Train combined universal model
-* Improve accuracy using MobileNetV2 or EfficientNet
-* Build a Streamlit web-app
-* Deploy final AI model
+> *High-level modules should not depend on low-level modules; both should depend on abstractions.*
+
+**Implementation in the project:**
+
+* The Streamlit UI depends on an **abstract prediction interface**, not on specific CNN implementations.
+* Prediction logic depends on abstract base classes rather than concrete model details.
+* This reduces tight coupling between UI, ML models, and database layers.
+
+    This makes the system flexible and easier to maintain.
 
 ---
 
-## 🙏 Acknowledgements
+##  Use of OOPS Concepts
 
-This work is developed as part of the **Infosys Internship Program**, under the guidance of the AI project mentors.
+The project applies the following **Object-Oriented Programming concepts**:
+
+* **Abstraction**
+
+  * Common prediction behavior is defined using an abstract base class.
+* **Inheritance**
+
+  * Crop-specific models inherit from the base prediction class.
+* **Polymorphism**
+
+  * Different crop models implement the same prediction interface.
+* **Encapsulation**
+
+  * Internal model logic is hidden from the UI layer.
+
+---
 
 

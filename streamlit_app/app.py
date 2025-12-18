@@ -1,95 +1,85 @@
-import streamlit as st
-from auth import init_db, add_user, verify_user
-from model_predict import predict
+# model_predict.py
+import torch
+import torch.nn.functional as F
+from torchvision import transforms
 from PIL import Image
-import time
-import sqlite3
+from pathlib import Path
+from abc import ABC, abstractmethod
 
-# -------------------------
-# INIT
-# -------------------------
-init_db()
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
+BASE_DIR = Path(__file__).resolve().parent.parent
+RICE_MODEL_PATH = BASE_DIR / "rice_model_improved.pth"
+PULSES_MODEL_PATH = BASE_DIR / "pulses_model_improved.pth"
 
-if "page" not in st.session_state:
-    st.session_state.page = "login"
+transform = transforms.Compose([
+    transforms.Resize((128, 128)),
+    transforms.ToTensor()
+])
 
-# -------------------------
-# LOGIN PAGE
-# -------------------------
-def login_page():
-    st.title("🔐 Login")
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+# =========================
+# Abstraction (SOLID + OOPS)
+# =========================
+class BaseDiseaseModel(ABC):
+    def __init__(self, model, classes):
+        self.model = model
+        self.classes = classes
 
-    if st.button("Login"):
-        if verify_user(username, password):
-            st.session_state.logged_in = True
-            st.session_state.page = "dashboard"
-            st.success("Login successful!")
-            st.rerun()
-        else:
-            st.error("Invalid username or password")
+    @abstractmethod
+    def predict(self, image_tensor):
+        pass
 
-    if st.button("Create New Account"):
-        st.session_state.page = "signup"
-        st.rerun()
 
-# -------------------------
-# SIGNUP PAGE
-# -------------------------
-def signup_page():
-    st.title("🆕 Create Account")
+# =========================
+# Concrete Implementations
+# =========================
+class RiceDiseaseModel(BaseDiseaseModel):
+    def predict(self, image_tensor):
+        output = self.model(image_tensor)
+        probs = F.softmax(output, dim=1)[0]
+        conf, idx = torch.max(probs, 0)
+        return "Rice", self.classes[idx], float(conf)
 
-    username = st.text_input("New Username")
-    password = st.text_input("New Password", type="password")
 
-    if st.button("Register"):
-        try:
-            add_user(username, password)
-            st.success("Account created successfully!")
-            time.sleep(1)
-            st.session_state.page = "login"
-            st.rerun()
-        except sqlite3.IntegrityError:
-            st.error("Username already exists")
+class PulsesDiseaseModel(BaseDiseaseModel):
+    def predict(self, image_tensor):
+        output = self.model(image_tensor)
+        probs = F.softmax(output, dim=1)[0]
+        conf, idx = torch.max(probs, 0)
+        return "Pulses", self.classes[idx], float(conf)
 
-    if st.button("Back to Login"):
-        st.session_state.page = "login"
-        st.rerun()
 
-# -------------------------
-# DASHBOARD
-# -------------------------
-def dashboard():
-    st.title("🌾 Crop Disease Prediction")
+# =========================
+# Model Loader (SRP)
+# =========================
+def load_model(path):
+    checkpoint = torch.load(path, map_location=DEVICE)
+    model = checkpoint["model"]
+    classes = checkpoint["classes"]
+    model.to(DEVICE)
+    model.eval()
+    return model, classes
 
-    uploaded_file = st.file_uploader(
-        "Upload an image", type=["jpg", "jpeg", "png"]
-    )
 
-    if uploaded_file:
-        img = Image.open(uploaded_file)
-        st.image(img, caption="Uploaded Image", use_column_width=True)
+rice_model, rice_classes = load_model(RICE_MODEL_PATH)
+pulses_model, pulses_classes = load_model(PULSES_MODEL_PATH)
 
-        result = predict(img)
-        st.success(f"Prediction: {result}")
+rice_predictor = RiceDiseaseModel(rice_model, rice_classes)
+pulses_predictor = PulsesDiseaseModel(pulses_model, pulses_classes)
 
-    if st.button("Logout"):
-        st.session_state.logged_in = False
-        st.session_state.page = "login"
-        st.rerun()
 
-# -------------------------
-# ROUTER
-# -------------------------
-if st.session_state.logged_in:
-    dashboard()
-else:
-    if st.session_state.page == "login":
-        login_page()
-    elif st.session_state.page == "signup":
-        signup_page()
+# =========================
+# Unified Prediction API
+# =========================
+def predict(pil_img):
+    img = transform(pil_img).unsqueeze(0).to(DEVICE)
+
+    with torch.no_grad():
+        r_crop, r_label, r_conf = rice_predictor.predict(img)
+        p_crop, p_label, p_conf = pulses_predictor.predict(img)
+
+    if r_conf >= p_conf:
+        return r_crop, r_label, r_conf
+    else:
+        return p_crop, p_label, p_conf
