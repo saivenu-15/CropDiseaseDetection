@@ -6,17 +6,28 @@ from PIL import Image
 from pathlib import Path
 from abc import ABC, abstractmethod
 
+# =========================
+# Device
+# =========================
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-RICE_MODEL_PATH = BASE_DIR / "rice_model_improved.pth"
-PULSES_MODEL_PATH = BASE_DIR / "pulses_model_improved.pth"
+# =========================
+# Correct Base Directory
+# streamlit_app/
+# ├── model_predict.py  <-- __file__
+# ├── models/
+# =========================
+BASE_DIR = Path(__file__).resolve().parent
+RICE_MODEL_PATH = BASE_DIR / "models" / "rice_model_improved.pth"
+PULSES_MODEL_PATH = BASE_DIR / "models" / "pulses_model_improved.pth"
 
+# =========================
+# Image Transform
+# =========================
 transform = transforms.Compose([
     transforms.Resize((128, 128)),
     transforms.ToTensor()
 ])
-
 
 # =========================
 # Abstraction (SOLID + OOPS)
@@ -30,7 +41,6 @@ class BaseDiseaseModel(ABC):
     def predict(self, image_tensor):
         pass
 
-
 # =========================
 # Concrete Implementations
 # =========================
@@ -41,14 +51,12 @@ class RiceDiseaseModel(BaseDiseaseModel):
         conf, idx = torch.max(probs, 0)
         return "Rice", self.classes[idx], float(conf)
 
-
 class PulsesDiseaseModel(BaseDiseaseModel):
     def predict(self, image_tensor):
         output = self.model(image_tensor)
         probs = F.softmax(output, dim=1)[0]
         conf, idx = torch.max(probs, 0)
         return "Pulses", self.classes[idx], float(conf)
-
 
 # =========================
 # Model Loader (SRP)
@@ -61,13 +69,14 @@ def load_model(path):
     model.eval()
     return model, classes
 
-
+# =========================
+# Load Models
+# =========================
 rice_model, rice_classes = load_model(RICE_MODEL_PATH)
 pulses_model, pulses_classes = load_model(PULSES_MODEL_PATH)
 
 rice_predictor = RiceDiseaseModel(rice_model, rice_classes)
 pulses_predictor = PulsesDiseaseModel(pulses_model, pulses_classes)
-
 
 # =========================
 # Unified Prediction API
