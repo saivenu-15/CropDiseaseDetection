@@ -1,183 +1,216 @@
-  **AI-Driven Crop Disease Detection (Rice & Pulses)**
 
-### *Milestone-1 – Model Training & Evaluation*
+---
+
+# **AI-Driven Crop Disease Detection (Rice & Pulses)**
 
 **Intern:** Sai Venu Gopala Swamy
 **Organization:** Infosys – AI Internship Program
 
 ---
 
-##  **Project Overview**
+##  Project Overview
 
-This project aims to develop an **AI-powered disease detection system** for:
+This project implements an **AI-powered crop disease detection system** for:
 
-* **Rice crops**
-* **Pulse crops**
+*  **Rice crops**
+*  **Pulse crops**
 
-The goal is to automate leaf disease diagnosis using **Deep Learning models** trained on curated datasets of plant leaf images.
+The system uses **Deep Learning (CNN models)** to automatically detect plant leaf diseases from images.
+A **Streamlit-based web interface** allows users to securely log in, upload leaf images, and receive disease predictions in real time.
 
-This repository contains all deliverables for **Milestone-1**, including:
-
-* Dataset preparation
-* Train/val/test dataset splitting
-* Model training for Rice and Pulses
-* Accuracy results
-* Saved model weights (.pth files)
+The project is designed following **SOLID principles** and **Object-Oriented Programming (OOPS)** concepts to ensure clean architecture, scalability, and maintainability.
 
 ---
 
-##  **Repository Structure**
+##  Objectives
 
-```
+* Automate crop disease identification using AI
+* Reduce manual inspection efforts
+* Provide a simple and secure web interface for predictions
+* Build a scalable system following software engineering best practices
 
+---
 
-```
+##  Repository Structure
+
+```text
 AI-Driven-Web-Application-for-Automated-Disease-Detection-in-Rice-and-Pulse-Crops/
 │
-├── dataset_split/                     # Final cleaned & reduced dataset used for training
+├── dataset_split/                 # Training datasets (Rice & Pulses)
 │   ├── RICE/
 │   └── PULSES/
 │
-├── split_codes/                       # Scripts for dataset splitting & reduction
+├── split_codes/                   # Dataset preprocessing
 │   ├── split_dataset.py
 │   ├── reduce_rice_dataset.py
 │   ├── reduce_pulses_dataset.py
 │   └── dataset_loader.py
 │
-├── training_scripts/                  # Model training scripts
+├── training_scripts/              # ONLY training-related scripts
 │   ├── train_rice_model.py
 │   └── train_pulses_model.py
 │
-├── results/                           # Training & testing result reports
+├── test_scripts/                  #  NEW FOLDER (IMPORTANT)
+│   ├── rice_test_with_prediction.py
+│   └── pulses_test_with_prediction.py
+│
+├── results/                       # Accuracy & evaluation outputs
 │   ├── rice_training_results.txt
 │   └── pulses_training_results.txt
 │
-├── streamlit_app/                     # Streamlit web application
-│   ├── app.py                         # Streamlit UI and navigation
-│   ├── auth.py                        # Authentication and SQLite DB handling
-│   ├── model_predict.py               # ML prediction logic (SOLID + OOPS)
-│   ├── requirements.txt               # Python dependencies
-│   ├── models/                        # Trained ML models
+├── streamlit_app/                 # Web application
+│   ├── app.py
+│   ├── auth.py
+│   ├── model_predict.py
+│   ├── requirements.txt
+│   ├── models/                    #  MUST EXIST
 │   │   ├── rice_model_improved.pth
 │   │   └── pulses_model_improved.pth
 │   └── db/
-│       └── users.db                   # SQLite database
+│       └── users.db
 │
-└── README.md                          # Project documentation
+└── README.md
 
+---
 
-```
-##  SOLID Principles Implementation in This Project
+##  Model Training Summary
 
-This project follows **SOLID principles** using **Object-Oriented Programming (OOPS)** concepts to ensure scalability, maintainability, and clean architecture.
+* Separate CNN models trained for:
+
+  * Rice disease classification
+  * Pulses disease classification
+* Datasets were **cleaned, reduced, and split** into train/validation/test sets
+* Best-performing models were saved using `.pth` format
+* Accuracy results are documented in the `results/` directory
+
+---
+
+##  Streamlit Web Application Features
+
+*  User Authentication (Login / Signup)
+*  Image Upload (JPG / PNG)
+*  AI-based Disease Prediction
+*  Clear Prediction Output
+*  Logout Functionality
+*  SQLite Database for credential storage
+
+---
+
+##  SOLID Principles Implementation
+
+This project strictly follows **SOLID principles** using **OOPS concepts** for clean and maintainable design.
 
 ---
 
 ### 1️ Single Responsibility Principle (SRP)
 
-> *Each module has only one responsibility.*
+> *Each module has one and only one responsibility.*
 
-**Implementation in the project:**
+**Implementation:**
 
-* `app.py`
+* `app.py` → UI, navigation, user interaction
+* `auth.py` → Authentication and database handling
+* `model_predict.py` → Model loading and prediction logic
+* `training_scripts/` → Model training only
+* `dataset_split/` → Dataset storage only
 
-  * Handles **Streamlit UI**, navigation, and user interaction only.
-* `auth.py`
-
-  * Handles **user authentication**, login, registration, and SQLite database operations.
-* `model_predict.py`
-
-  * Handles **model loading and prediction logic** only.
-* `training_scripts/`
-
-  * Contains scripts used **only for training models**.
-* `dataset_split/`
-
-  * Contains datasets used **only for training and evaluation**.
-
- This separation ensures that changes in one module do not affect others.
+✔ Changes in one module do not affect others.
 
 ---
 
 ### 2️ Open / Closed Principle (OCP)
 
-> *Software entities should be open for extension but closed for modification.*
+> *Open for extension, closed for modification.*
 
-**Implementation in the project:**
+**Implementation:**
 
-* A **base abstract class** is used for prediction logic.
-* New crop disease models (e.g., Wheat, Tomato) can be added by **creating new subclasses**.
-* Existing UI and prediction flow do **not need to be modified**.
+* Prediction logic is designed so that **new crop models** can be added easily
+* Existing code does not need modification to support future crops (e.g., wheat, tomato)
 
- This allows easy extension of the system without rewriting existing code.
+✔ System is extensible without breaking existing functionality.
 
 ---
 
 ### 3️ Liskov Substitution Principle (LSP)
 
-> *Derived classes must be substitutable for their base classes.*
+> *Derived classes must be substitutable for base classes.*
 
-**Implementation in the project:**
+**Implementation:**
 
-* `RiceDiseaseModel` and `PulsesDiseaseModel` inherit from a common abstract base class.
-* Both models implement the same `predict()` interface.
-* Either model can be used interchangeably without breaking the application.
+* Rice and Pulses models follow the same prediction interface
+* Either model can be used interchangeably by the UI
 
- This ensures consistent behavior across different crop models.
+✔ Ensures consistent behavior across models.
 
 ---
 
 ### 4️ Interface Segregation Principle (ISP)
 
-> *Clients should not be forced to depend on interfaces they do not use.*
+> *Clients should not depend on unnecessary interfaces.*
 
-**Implementation in the project:**
+**Implementation:**
 
-* The Streamlit UI (`app.py`) interacts with:
+* UI interacts only with:
 
-  * `verify_user()` and `add_user()` from `auth.py`
+  * `verify_user()` / `add_user()` from `auth.py`
   * `predict()` from `model_predict.py`
 * UI does **not depend on**:
 
-  * Database query logic
-  * PyTorch model internals
+  * Database internals
   * CNN architecture details
 
- Each module exposes only the necessary interfaces.
+✔ Loose coupling between modules.
 
 ---
 
 ### 5️ Dependency Inversion Principle (DIP)
 
-> *High-level modules should not depend on low-level modules; both should depend on abstractions.*
+> *High-level modules depend on abstractions, not implementations.*
 
-**Implementation in the project:**
+**Implementation:**
 
-* The Streamlit UI depends on an **abstract prediction interface**, not on specific CNN implementations.
-* Prediction logic depends on abstract base classes rather than concrete model details.
-* This reduces tight coupling between UI, ML models, and database layers.
+* Streamlit UI depends on an abstract prediction interface
+* Prediction logic abstracts model details from UI
 
-    This makes the system flexible and easier to maintain.
+✔ Makes the system flexible and easy to maintain.
 
 ---
 
 ##  Use of OOPS Concepts
 
-The project applies the following **Object-Oriented Programming concepts**:
+The project applies the following OOPS concepts:
 
-* **Abstraction**
-
-  * Common prediction behavior is defined using an abstract base class.
-* **Inheritance**
-
-  * Crop-specific models inherit from the base prediction class.
-* **Polymorphism**
-
-  * Different crop models implement the same prediction interface.
-* **Encapsulation**
-
-  * Internal model logic is hidden from the UI layer.
+* **Abstraction** – Common prediction behavior defined via base logic
+* **Inheritance** – Crop-specific models extend shared prediction behavior
+* **Polymorphism** – Same prediction interface used for different crops
+* **Encapsulation** – Internal model logic hidden from UI
 
 ---
+
+##  How to Run the Application
+
+```bash
+cd streamlit_app
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+##  Conclusion
+
+This project demonstrates the practical application of:
+
+* Deep Learning
+* Streamlit web development
+* SOLID principles
+* Object-Oriented Programming
+* Clean software architecture
+
+It provides a scalable foundation for real-world AI-based agricultural solutions.
+
+---
+
+
 
 
