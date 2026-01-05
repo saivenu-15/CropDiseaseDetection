@@ -1,0 +1,6 @@
+ __pycache__/
+*.pth
+*.jpg
+*.png
+dataset_split/
+db/users.db
