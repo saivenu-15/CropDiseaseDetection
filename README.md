@@ -34,17 +34,9 @@ The project is designed following **SOLID principles** and **Object-Oriented Pro
 ##  Repository Structure
 
 ```text
+
 AI-Driven-Web-Application-for-Automated-Disease-Detection-in-Rice-and-Pulse-Crops/
 │
-├── dataset_split/                 # Training datasets (Rice & Pulses)
-│   ├── RICE/
-│   └── PULSES/
-│
-├── split_codes/                   # Dataset preprocessing
-│   ├── split_dataset.py
-│   ├── reduce_rice_dataset.py
-│   ├── reduce_pulses_dataset.py
-│   └── dataset_loader.py
 │
 ├── training_scripts/              # ONLY training-related scripts
 │   ├── train_rice_model.py
@@ -67,7 +59,10 @@ AI-Driven-Web-Application-for-Automated-Disease-Detection-in-Rice-and-Pulse-Crop
 │   │   ├── rice_model_improved.pth
 │   │   └── pulses_model_improved.pth
 │   └── db/
-│       └── users.db
+│   │    └── users.db
+│   └── chatbot.py
+│   
+│   └──
 │
 └── README.md
 
