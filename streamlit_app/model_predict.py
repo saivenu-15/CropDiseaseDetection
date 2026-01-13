@@ -116,6 +116,6 @@ def predict(pil_img):
         p_conf, p_idx = torch.max(pulses_prob, 0)
 
     if r_conf >= p_conf:
-        return f"Rice → {rice_classes[r_idx]} ({r_conf:.2%})"
+        return ("Rice", rice_classes[r_idx], float(r_conf))
     else:
-        return f"Pulses → {pulses_classes[p_idx]} ({p_conf:.2%})"
+        return ("Pulses", pulses_classes[p_idx], float(p_conf))

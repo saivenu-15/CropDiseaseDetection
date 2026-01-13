@@ -3,7 +3,7 @@
 class ProjectChatBot:
     def __init__(self):
         self.responses = {
-            "hi": "Hello! 👋 How can I help you?",
+            "hi": "Hello! 👋 How can I help you?  I AM THIS PROJECT CHATBOT ",
             "hello": "Hi there! 😊 ",
             "project": "This project detects diseases in Rice and Pulse crops using Deep Learning.",
             "upload": "Go to the Upload section and select a leaf image (jpg/png).",

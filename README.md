@@ -61,8 +61,11 @@ AI-Driven-Web-Application-for-Automated-Disease-Detection-in-Rice-and-Pulse-Crop
 │   └── db/
 │   │    └── users.db
 │   └── chatbot.py
-│   
-│
+│   ├── disease_advice.py
+│   │ 
+│   ├──pdf_report.py
+│ 
+│ 
 └── README.md
 
 ---

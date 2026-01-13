@@ -1,6 +1,16 @@
- __pycache__/
-*.pth
-*.jpg
-*.png
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Database
+*.db
+
+# Datasets & models
 dataset_split/
-db/users.db
+*.pth
+
+# System
+desktop.ini
