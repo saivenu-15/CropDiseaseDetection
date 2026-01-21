@@ -9,14 +9,12 @@
 ---
 
 ##  Project Overview
+ Project Overview
 
-This project implements an **AI-powered crop disease detection system** for:
+This project is an AI-powered web application designed to detect crop diseases in rice and pulse crops using leaf images.
+It leverages deep learning (CNNs) for accurate disease classification and provides confidence scores, disease insights, treatment suggestions, and downloadable reports through an interactive web interface.
 
-*  **Rice crops**
-*  **Pulse crops**
-
-The system uses **Deep Learning (CNN models)** to automatically detect plant leaf diseases from images.
-A **Streamlit-based web interface** allows users to securely log in, upload leaf images, and receive disease predictions in real time.
+The system aims to assist farmers, agricultural experts, and researchers in early disease detection to reduce crop losses and improve productivity.
 
 The project is designed following **SOLID principles** and **Object-Oriented Programming (OOPS)** concepts to ensure clean architecture, scalability, and maintainability.
 
@@ -30,45 +28,76 @@ The project is designed following **SOLID principles** and **Object-Oriented Pro
 * Build a scalable system following software engineering best practices
 
 ---
+.
+
+🎯 Key Features
+
+📷 Image-based crop disease detection
+
+🌱 Supports Rice & Pulse crops
+
+🤖 CNN-based deep learning model
+
+📊 Confidence scoring for predictions
+
+🧪 Disease causes, symptoms, prevention & treatment advice
+
+📄 Downloadable disease report (PDF)
+
+🔐 User authentication (login & signup)
+
+💬 Integrated chatbot for guidance
+
+🌐 Interactive Streamlit-based UI
+---
 
 ##  Repository Structure
 
 ```text
 
-AI-Driven-Web-Application-for-Automated-Disease-Detection-in-Rice-and-Pulse-Crops/
+AI-Driven-Web-Application-for-Automated-Disease-Detection
 │
+├── db/                     # Database files (user authentication)
 │
-├── training_scripts/              # ONLY training-related scripts
-│   ├── train_rice_model.py
-│   └── train_pulses_model.py
+├── models/                 # Trained deep learning model files (.pth)
 │
-├── test_scripts/                  #  NEW FOLDER (IMPORTANT)
-│   ├── rice_test_with_prediction.py
-│   └── pulses_test_with_prediction.py
+├── results/                # Model training and evaluation results
 │
-├── results/                       # Accuracy & evaluation outputs
-│   ├── rice_training_results.txt
-│   └── pulses_training_results.txt
+├── streamlit_app/          # Streamlit-specific assets (if any)
 │
-├── streamlit_app/                 # Web application
-│   ├── app.py
-│   ├── auth.py
-│   ├── model_predict.py
-│   ├── requirements.txt
-│   ├── models/                    #  MUST EXIST
-│   │   ├── rice_model_improved.pth
-│   │   └── pulses_model_improved.pth
-│   └── db/
-│   │    └── users.db
-│   └── chatbot.py
-│   ├── disease_advice.py
-│   │ 
-│   ├──pdf_report.py
-│ 
-│ 
-└── README.md
+├── test_scripts/           # Model testing scripts
+│
+├── training_scripts/       # Model training scripts
+│
+├── app.py                  # Main Streamlit application entry point
+├── auth.py                 # User authentication logic
+├── chatbot.py              # AI chatbot module
+├── disease_advice.py       # Disease recommendations & guidance
+├── model_predict.py        # Model loading & prediction logic
+├── pdf_report.py           # PDF report generation
+│
+├── Finalized_PPT_Final.pdf # Final project presentation
+│
+├── requirements.txt        # Python dependencies
+├── .gitignore              # Git ignore rules
+└── README.md               # Project documentation
+
 
 ---
+
+🚀 How to Run the Project
+
+1️⃣ Clone the Repository
+git clone <repository-url>
+cd AI-Driven-Web-Application-for-Automated-Disease-Detection
+
+2️⃣ Install Dependencies
+pip install -r requirements.txt
+pip install -r streamlit_app/requirements.txt
+
+3️⃣ Run the Application
+
+streamlit run app.py
 
 ##  Model Training Summary
 
