@@ -2,5 +2,6 @@ streamlit
 torch
 torchvision
 numpy
-pillow
-opencv-python
+Pillow
+opencv-python-headless
+reportlab

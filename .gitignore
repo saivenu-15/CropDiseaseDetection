@@ -8,9 +8,8 @@ venv/
 # Database
 *.db
 
-# Datasets & models
+# Models
 dataset_split/
-*.pth
 
 # System
 desktop.ini
