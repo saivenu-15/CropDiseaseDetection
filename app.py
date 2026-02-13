@@ -148,13 +148,7 @@ st.markdown("""
     }
     
     /* Override Streamlit's sidebar hiding */
-    section[data-testid="stSidebar"][aria-hidden="true"],
-    section[data-testid="stSidebar"][aria-expanded="false"] {
-        display: block !important;
-        visibility: visible !important;
-        transform: translateX(0) !important;
-        width: 300px !important;
-    }
+
     
     /* Ensure sidebar content is visible */
     section[data-testid="stSidebar"] [data-testid="stSidebarContent"],
@@ -165,11 +159,7 @@ st.markdown("""
     }
     
     /* Override any hiding */
-    section[data-testid="stSidebar"][aria-hidden="true"] {
-        display: block !important;
-        visibility: visible !important;
-        transform: translateX(0) !important;
-    }
+
     
     /* Sidebar text color - force white */
     section[data-testid="stSidebar"] h1,
@@ -192,9 +182,6 @@ st.markdown("""
     .main .block-container {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
-        max-width: calc(100% - 300px) !important;
     }
     
     /* Fix empty divs causing white space */
@@ -269,16 +256,10 @@ st.markdown("""
     header {visibility: hidden;}
     
     /* Ensure sidebar is visible */
-    section[data-testid="stSidebar"] {
-        min-width: 250px !important;
-    }
+
     
     /* Fix main content padding */
-    .main .block-container {
-        max-width: calc(100% - 300px) !important;
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
-    }
+
     
     /* Remove extra white space */
     .element-container {
