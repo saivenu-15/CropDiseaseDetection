@@ -253,7 +253,6 @@ st.markdown("""
     /* Hide default Streamlit elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
     
     /* Ensure sidebar is visible */
 
