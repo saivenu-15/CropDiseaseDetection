@@ -145,15 +145,6 @@ st.markdown("""
     [class*="sidebar"],
     [class*="Sidebar"] {
         background: linear-gradient(180deg, #667eea 0%, #764ba2 100%) !important;
-        min-width: 300px !important;
-        width: 300px !important;
-        max-width: 300px !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        z-index: 999 !important;
-        position: relative !important;
-        transform: translateX(0) !important;
     }
     
     /* Override Streamlit's sidebar hiding */
@@ -752,20 +743,7 @@ def dashboard():
     # Sidebar - Enhanced Navigation Panel - ALWAYS VISIBLE
     with st.sidebar:
         # Force sidebar visibility with inline style
-        st.markdown("""
-        <style>
-            section[data-testid="stSidebar"],
-            div[data-testid="stSidebar"],
-            [data-baseweb="drawer"] {
-                display: block !important;
-                visibility: visible !important;
-                width: 300px !important;
-                min-width: 300px !important;
-                opacity: 1 !important;
-                transform: translateX(0) !important;
-            }
-        </style>
-        """, unsafe_allow_html=True)
+
         
         st.markdown("""
         <div style='text-align: center; padding: 1.5rem 0; background: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 1rem;'>
